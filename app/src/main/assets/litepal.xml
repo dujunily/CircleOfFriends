@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="Wechat"/>
+
+    <version value="1"/>
+
+    <list>
+        <mapping class="com.luckydu.dujun.circleoffriends.bean.Tweet" />
+        <mapping class="com.luckydu.dujun.circleoffriends.bean.SenderBean" />
+        <mapping class="com.luckydu.dujun.circleoffriends.bean.ImagesBean" />
+        <mapping class="com.luckydu.dujun.circleoffriends.bean.CommentsBean" />
+    </list>
+</litepal>

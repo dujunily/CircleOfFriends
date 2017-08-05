@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CircleOfFriends</string>
+    <string name="title_activity_circle_of_friends">CircleOfFriendsActivity</string>
+    <string name="action_settings">Settings</string>
+</resources>
