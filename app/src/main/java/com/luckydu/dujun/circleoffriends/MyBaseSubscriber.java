@@ -23,7 +23,6 @@ public abstract  class MyBaseSubscriber<T>  extends BaseSubscriber<T> {
         this.context = context;
         progress = new ProgressDialog(context);
         progress.setMessage("朋友圈拼命加载中....");
-
     }
 
 
@@ -42,8 +41,6 @@ public abstract  class MyBaseSubscriber<T>  extends BaseSubscriber<T> {
             }
             progress.show();
         }
-
-
     }
 
     @Override
