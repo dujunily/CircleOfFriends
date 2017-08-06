@@ -8,8 +8,10 @@ import com.luckydu.dujun.circleoffriends.ui.model.ICircleOfFriendsModel;
 import com.luckydu.dujun.circleoffriends.ui.model.impl.CircleOfFriendsModel;
 import com.luckydu.dujun.circleoffriends.ui.presenter.ICircleOfFriendsPresenter;
 import com.luckydu.dujun.circleoffriends.ui.view.ICircleOfFriendsView;
+import com.luckydu.dujun.circleoffriends.util.StringUtils;
 import com.tamic.novate.Throwable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +43,13 @@ public class CircleOfFriendsPresenter implements ICircleOfFriendsPresenter {
 
             @Override
             public void onNext(List<Tweet> tweets) {
-                mView.onSuccess(tweets);
+                List<Tweet> tweetList = new ArrayList<>();
+                for (Tweet tweet : tweets) {
+                    if (!StringUtils.isNull(tweet.getContent()) && tweet.getImages() != null && tweet.getImages().size() != 0) {
+                        tweetList.add(tweet);
+                    }
+                }
+                mView.onSuccess(tweetList);
             }
         });
     }
