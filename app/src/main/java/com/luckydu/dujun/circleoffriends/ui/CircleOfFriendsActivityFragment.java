@@ -10,9 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luckydu.dujun.circleoffriends.R;
+import com.luckydu.dujun.circleoffriends.bean.SenderBean;
 import com.luckydu.dujun.circleoffriends.bean.Tweet;
 import com.luckydu.dujun.circleoffriends.ui.presenter.impl.CircleOfFriendsPresenter;
+import com.luckydu.dujun.circleoffriends.ui.presenter.impl.UserInfoPresenter;
 import com.luckydu.dujun.circleoffriends.ui.view.ICircleOfFriendsView;
+import com.luckydu.dujun.circleoffriends.ui.view.IUserInfoView;
 
 import java.util.List;
 
@@ -23,7 +26,7 @@ import butterknife.Unbinder;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CircleOfFriendsActivityFragment extends Fragment implements ICircleOfFriendsView{
+public class CircleOfFriendsActivityFragment extends Fragment implements ICircleOfFriendsView, IUserInfoView {
 
     @BindView(R.id.tv_content)
     TextView tvContent;
@@ -32,6 +35,7 @@ public class CircleOfFriendsActivityFragment extends Fragment implements ICircle
 
     private Context context;
     private CircleOfFriendsPresenter circleOfFriendsPresenter;
+    private UserInfoPresenter userInfoPresenter;
 
     public CircleOfFriendsActivityFragment() {
     }
@@ -53,8 +57,11 @@ public class CircleOfFriendsActivityFragment extends Fragment implements ICircle
     }
 
     private void initData() {
+        userInfoPresenter = new UserInfoPresenter(this);
         circleOfFriendsPresenter = new CircleOfFriendsPresenter(this);
-        getTweets("jsmith");
+        String user = "jsmith";
+        getUserInfo(user);
+        getTweets(user);
     }
 
     @Override
@@ -65,13 +72,24 @@ public class CircleOfFriendsActivityFragment extends Fragment implements ICircle
 
     @Override
     public void getTweets(String user) {
-        circleOfFriendsPresenter.getTweets(getActivity(),user);
+        circleOfFriendsPresenter.getTweets(context,user);
     }
 
     @Override
     public void onSuccess(List<Tweet> tweets) {
         Toast.makeText(context,"size:"+tweets.size(),Toast.LENGTH_SHORT).show();
-        tvContent.setText(tweets.toString());
+    }
+
+    @Override
+    public void getUserInfo(String user) {
+        userInfoPresenter.getUserInfo(context,user);
+    }
+
+    @Override
+    public void onSuccess(SenderBean senderBean) {
+        // 显示用户信息
+        Toast.makeText(context,"size:"+senderBean.toString(),Toast.LENGTH_SHORT).show();
+        tvContent.setText(senderBean.toString());
     }
 
     @Override
